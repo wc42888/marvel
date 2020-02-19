@@ -1,6 +1,7 @@
 import React, {memo} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const cardHeight = 150;
 
@@ -49,6 +50,8 @@ const styles = StyleSheet.create({
 const HeroCard = ({hero}) => {
   const {root, arrow, avator, name, thumbnail, nameText} = styles;
 
+  const navigation = useNavigation();
+
   const renderHeroAvator = () => (
     <View style={avator}>
       <Image
@@ -70,12 +73,16 @@ const HeroCard = ({hero}) => {
     </View>
   );
 
+  const navigateToHeroDetail = () => navigation.navigate('HeroDetail', {hero});
+
   return (
-    <View style={root}>
-      {renderHeroAvator()}
-      {renderHeroName()}
-      {renderArrow()}
-    </View>
+    <TouchableOpacity onPress={navigateToHeroDetail}>
+      <View style={root}>
+        {renderHeroAvator()}
+        {renderHeroName()}
+        {renderArrow()}
+      </View>
+    </TouchableOpacity>
   );
 };
 
