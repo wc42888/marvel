@@ -1,24 +1,17 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
-import {View, Text} from 'react-native';
-import {getMarvelHero} from '../redux/actions/marvelHeros';
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import ViewHeroesScreen from './ViewHeroesScreen';
+import HeroDetailScreen from './HeroDetailScreen';
 
-const Test = ({getMarvelHero}) => {
-  useEffect(() => {
-    (async function anyNameFunction() {
-      await getMarvelHero();
-    })();
-  }, []);
+const Stack = createStackNavigator();
+
+const MainApp = () => {
   return (
-    <View>
-      <Text>hello world</Text>
-    </View>
+    <Stack.Navigator headerMode="none" initialRouteName="ViewHeroes">
+      <Stack.Screen name="ViewHeroes" component={ViewHeroesScreen} />
+      <Stack.Screen name="HeroDetail" component={HeroDetailScreen} />
+    </Stack.Navigator>
   );
 };
 
-export default connect(
-  null,
-  {
-    getMarvelHero,
-  },
-)(Test);
+export default MainApp;

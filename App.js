@@ -6,18 +6,29 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+import {StatusBar, SafeAreaView, StyleSheet} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
-import Test from './src/containers';
+import MainApp from './src/containers';
+
+const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+    backgroundColor: '#EEEEEE',
+  },
+});
 
 const App = () => {
+  const {safeAreaView} = styles;
   return (
     <Provider store={store}>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <Test />
-      </SafeAreaView>
+      <NavigationContainer>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={safeAreaView}>
+          <MainApp />
+        </SafeAreaView>
+      </NavigationContainer>
     </Provider>
   );
 };
