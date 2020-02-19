@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import {useNavigation} from '@react-navigation/native';
+import {BLUE} from '../Shared/color';
 
 const styles = StyleSheet.create({
   root: {
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   goBackText: {
-    color: '#335EFF',
+    color: BLUE,
   },
   section: {
     flex: 1,
@@ -27,6 +28,8 @@ const styles = StyleSheet.create({
   },
   nameText: {
     textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
 
