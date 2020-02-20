@@ -1,17 +1,21 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import SummaryInfo from './SummaryInfo';
 import ExtraInfo from './ExtraInfo';
 
 const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
-    paddingLeft: 10,
-    paddingRight: 10,
-    width: '100%',
+    margin: 10,
     minHeight: 200,
     borderColor: '#DDDDDD',
     borderWidth: 1,
+    borderRadius: 8,
+    backgroundColor: '#FFFFFF',
+    shadowColor: 'rgba(32,39,44,0.5)',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 1,
+    elevation: 3,
   },
   photoContainer: {
     flex: 1,

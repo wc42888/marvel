@@ -8,13 +8,22 @@ const styles = StyleSheet.create({
     margin: 5,
     borderWidth: 1,
     borderColor: '#DDDDDD',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    shadowColor: 'rgba(32,39,44,0.5)',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 1,
+    elevation: 3,
   },
   title: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    alignItems: 'center',
     borderBottomColor: '#DDDDDD',
     borderBottomWidth: 1,
   },
   titleText: {
-    fontSize: 24,
+    fontSize: 20,
   },
   viewer: {
     flexDirection: 'row',

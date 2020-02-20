@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   thumbnail: {
     height: cardHeight,
     width: 150,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   nameText: {
     fontWeight: 'bold',

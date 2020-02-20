@@ -4,26 +4,32 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    padding: 5,
+    padding: 10,
   },
   emptyContent: {
     marginTop: 20,
     alignItems: 'center',
   },
   cover: {
-    flex: 1,
-    resizeMode: 'cover',
+    width: '100%',
+    maxWidth: 200,
+    maxHeight: 200,
+    aspectRatio: 1,
+    resizeMode: 'contain',
   },
   coverContaier: {
-    flex: 1,
-    maxHeight: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
+    marginTop: 5,
+    marginBottom: 10,
     alignItems: 'center',
   },
   titleText: {
     fontWeight: 'bold',
     textAlign: 'center',
+    fontStyle: 'italic',
   },
   informationType: {
     fontWeight: 'bold',
