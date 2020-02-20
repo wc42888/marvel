@@ -1,17 +1,45 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {connect} from 'react-redux';
+import {ScrollView} from 'react-native';
+import {
+  Header,
+  HeroSummary,
+  ComicsViewer,
+} from '../components/HeroDetailScreen';
+import {getAllHeroComics} from '../redux/actions/comics';
 import {useLoadInitialData} from '../utils/hooks';
-import {comicsSelect} from '../selectors';
+import {comicsSelect, loadingSelect} from '../selectors';
 
-const HeroDetailScreen = () => (
-  <View>
-    <Text>HeroDetailScreen</Text>
-  </View>
-);
+const HeroDetailScreen = ({
+  getAllHeroComics,
+  allHeroComics,
+  route,
+  isRetrivingComics,
+}) => {
+  const {
+    params: {hero},
+  } = route;
 
-export default HeroDetailScreen;
   useLoadInitialData(() => getAllHeroComics(hero.comics.collectionURI));
+
+  return (
+    <ScrollView>
+      <Header hero={hero} />
+      <HeroSummary hero={hero} />
+      <ComicsViewer
+        comics={allHeroComics}
+        isRetrivingComics={isRetrivingComics}
+      />
+    </ScrollView>
+  );
+};
+
 const mapStateToProps = (state, props) => ({
   allHeroComics: comicsSelect.getAllComicsForHero(state, props),
+  isRetrivingComics: loadingSelect.isRetrivingComics(state),
 });
+
+export default connect(
   mapStateToProps,
+  {getAllHeroComics},
+)(HeroDetailScreen);

@@ -44,7 +44,6 @@ const HeroList = ({
   const getData = heroes => {
     if (!searchText) return heroes;
     return heroes.filter(hero => {
-      console.log('searchText', searchText);
       if (!hero.name) return false;
       return hero.name.toUpperCase().includes(searchText.toUpperCase());
     });
