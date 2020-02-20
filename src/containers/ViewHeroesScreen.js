@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {getMarvelHero} from '../redux/actions/marvelHeros';
 import {SearchBar, HeroList} from '../components/ViewHeroesScreen';
 import {marvelHeroesSelect, loadingSelect} from '../selectors';
+import {useLoadInitialData} from '../utils/hooks';
 
 const styles = StyleSheet.create({
   root: {
@@ -23,15 +24,7 @@ const ViewHeroesScreen = ({
 
   const clearSearchText = () => setSearchText(null);
 
-  useEffect(() => {
-    const fetchHeroes = async () => {
-      await getMarvelHero();
-    };
-
-    fetchHeroes();
-    //  disable the role because the fetch function only runs once
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useLoadInitialData(getMarvelHero);
 
   const {root} = styles;
 
