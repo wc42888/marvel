@@ -24,7 +24,7 @@ const ExtraInfo = ({hero}) => {
   const renderExtraInfo = () =>
     hero.urls.map(url => {
       return (
-        <Text style={link} onPress={() => openLink(url.url)}>
+        <Text key={url.type} style={link} onPress={() => openLink(url.url)}>
           {url.type}
         </Text>
       );
