@@ -24,19 +24,21 @@ const HeroDetailScreen = ({
   useLoadInitialData(() => getAllHeroComics(hero.comics.collectionURI));
 
   return (
-    <ScrollView>
+    <>
       <Header hero={hero} />
-      <HeroSummary hero={hero} />
-      <ComicsViewer
-        comics={allHeroComics}
-        isRetrivingComics={isRetrivingComics}
-      />
-      <RelationshipChart
-        comics={allHeroComics}
-        hero={hero}
-        isRetrivingComics={isRetrivingComics}
-      />
-    </ScrollView>
+      <ScrollView>
+        <HeroSummary hero={hero} />
+        <ComicsViewer
+          comics={allHeroComics}
+          isRetrivingComics={isRetrivingComics}
+        />
+        <RelationshipChart
+          comics={allHeroComics}
+          hero={hero}
+          isRetrivingComics={isRetrivingComics}
+        />
+      </ScrollView>
+    </>
   );
 };
 

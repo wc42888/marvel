@@ -64,7 +64,6 @@ const HeroCard = ({hero}) => {
   const navigation = useNavigation();
 
   let transformStyle = {
-    ...styles.card,
     transform: [{scale: cardAnimate}],
   };
 
@@ -93,7 +92,7 @@ const HeroCard = ({hero}) => {
 
   const onPressInAnimate = () => {
     Animated.timing(cardAnimate, {
-      toValue: 1.1,
+      toValue: 1.3,
       duration: 250,
       easing: Easing.linear,
       useNativeDriver: true,
