@@ -5,6 +5,7 @@ import {
   Header,
   HeroSummary,
   ComicsViewer,
+  RelationshipChart,
 } from '../components/HeroDetailScreen';
 import {getAllHeroComics} from '../redux/actions/comics';
 import {useLoadInitialData} from '../utils/hooks';
@@ -28,6 +29,11 @@ const HeroDetailScreen = ({
       <HeroSummary hero={hero} />
       <ComicsViewer
         comics={allHeroComics}
+        isRetrivingComics={isRetrivingComics}
+      />
+      <RelationshipChart
+        comics={allHeroComics}
+        hero={hero}
         isRetrivingComics={isRetrivingComics}
       />
     </ScrollView>
