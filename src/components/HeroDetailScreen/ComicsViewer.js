@@ -85,21 +85,17 @@ const ComicsViewer = ({comics, isRetrivingComics}) => {
     </View>
   );
 
-  const renderContent = () => {
-    if (isRetrivingComics)
-      return (
-        <View style={activityIndicator}>
-          <ActivityIndicator />
-        </View>
-      );
-
-    return (
+  const renderContent = () =>
+    isRetrivingComics ? (
+      <View style={activityIndicator}>
+        <ActivityIndicator size="large" />
+      </View>
+    ) : (
       <View style={root}>
         {renderTitle()}
         {renderViewer()}
       </View>
     );
-  };
 
   return renderContent();
 };
