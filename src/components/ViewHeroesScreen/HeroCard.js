@@ -1,7 +1,16 @@
 import React, {memo} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Animated,
+  Easing,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useOnLoadAnimation} from '../../utils/hooks';
 
 const cardHeight = 150;
 
@@ -50,7 +59,14 @@ const styles = StyleSheet.create({
 const HeroCard = ({hero}) => {
   const {root, arrow, avator, name, thumbnail, nameText} = styles;
 
+  const cardAnimate = useOnLoadAnimation();
+
   const navigation = useNavigation();
+
+  let transformStyle = {
+    ...styles.card,
+    transform: [{scale: cardAnimate}],
+  };
 
   const renderHeroAvator = () => (
     <View style={avator}>
@@ -75,13 +91,34 @@ const HeroCard = ({hero}) => {
 
   const navigateToHeroDetail = () => navigation.navigate('HeroDetail', {hero});
 
+  const onPressInAnimate = () => {
+    Animated.timing(cardAnimate, {
+      toValue: 1.1,
+      duration: 250,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const onPressOutAnimate = () => {
+    Animated.timing(cardAnimate, {
+      toValue: 1,
+      duration: 100,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
-    <TouchableOpacity onPress={navigateToHeroDetail}>
-      <View style={root}>
+    <TouchableOpacity
+      onPress={navigateToHeroDetail}
+      onPressIn={onPressInAnimate}
+      onPressOut={onPressOutAnimate}>
+      <Animated.View style={[root, transformStyle]}>
         {renderHeroAvator()}
         {renderHeroName()}
         {renderArrow()}
-      </View>
+      </Animated.View>
     </TouchableOpacity>
   );
 };
