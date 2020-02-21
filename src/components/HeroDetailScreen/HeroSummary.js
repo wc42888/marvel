@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image, Animated} from 'react-native';
 import SummaryInfo from './SummaryInfo';
 import ExtraInfo from './ExtraInfo';
+import {useOnLoadAnimation} from '../../utils/hooks';
 
 const styles = StyleSheet.create({
   root: {
@@ -36,6 +37,13 @@ const styles = StyleSheet.create({
 const HeroSummary = ({hero}) => {
   const {root, photoContainer, photo, summary} = styles;
 
+  const cardAnimate = useOnLoadAnimation();
+
+  let transformStyle = {
+    ...styles.card,
+    transform: [{scale: cardAnimate}],
+  };
+
   const renderPhotoSection = () => (
     <View style={photoContainer}>
       <Image
@@ -54,10 +62,10 @@ const HeroSummary = ({hero}) => {
   );
 
   return (
-    <View style={root}>
+    <Animated.View style={[root, transformStyle]}>
       {renderPhotoSection()}
       {renderSummarySection()}
-    </View>
+    </Animated.View>
   );
 };
 
