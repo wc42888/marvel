@@ -1,10 +1,27 @@
 import comicsReducers from './comics';
 import * as comicsAction from '../actions/comics';
 
+const getRandomNumber = max => Math.floor(Math.random() * max) + 1;
+
+const randomComicsGenerator = (comicName, max) => {
+  const comics = [];
+  const numberOfComics = getRandomNumber(max);
+
+  for (let i = 0; i < numberOfComics; ++i) {
+    comics.push({title: `${comicName}_${i}`});
+  }
+
+  return comics;
+};
+
+const MAX_COMIC1 = getRandomNumber(10);
+const MAX_COMIC2 = getRandomNumber(10);
+const MAX_COMIC3 = getRandomNumber(10);
+
 describe('comics reducer', () => {
   describe(comicsAction.GET_HERO_COMICS_SUCCESS, () => {
     const {GET_HERO_COMICS_SUCCESS} = comicsAction;
-    const comics1 = [{title: 'comic1_1'}, {title: 'comic1_2'}];
+    const comics1 = randomComicsGenerator('comics1', MAX_COMIC1);
     const newStateAfterComics1 = comicsReducers([], {
       type: GET_HERO_COMICS_SUCCESS,
       payload: {comics: comics1},
@@ -14,11 +31,7 @@ describe('comics reducer', () => {
       expect(newStateAfterComics1).toEqual(comics1);
     });
 
-    const comics2 = [
-      {title: 'comic2_1'},
-      {title: 'comic2_2'},
-      {title: 'comic2_3'},
-    ];
+    const comics2 = randomComicsGenerator('comics2', MAX_COMIC2);
 
     const newStateAfterComics2 = comicsReducers(newStateAfterComics1, {
       type: GET_HERO_COMICS_SUCCESS,
@@ -30,8 +43,10 @@ describe('comics reducer', () => {
       expect(newStateAfterComics2).toEqual(expectedState);
     });
 
-    const duplicated = [comics1[0], comics1[1], comics2[1]];
-    const uniqueComics = [{title: 'comic3_1'}, {title: 'comic2_5'}];
+    const duplicated = randomComicsGenerator('comic1', comics1.length).concat(
+      randomComicsGenerator('comic2', comics2.length),
+    );
+    const uniqueComics = randomComicsGenerator('comic3', MAX_COMIC3);
 
     const comics3 = [...duplicated, ...uniqueComics];
 
